@@ -19,7 +19,7 @@ const Hero = () => {
         </h2>
 
         <div className="flex items-center gap-2 w-full mt-[10vh]">
-          <span className="text-white text-xl">myprojects.com</span>
+          <span className="text-white text-xl">myprojects.com/</span>
 
           <TextInput placeholder="Your link" />
 
