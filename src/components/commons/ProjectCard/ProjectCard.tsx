@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ProjectCard = () => {
   return (
-    <div className="w-[430px] flex gap-3 p-3 rounded-[20px] border border-white/10 bg-gray-900">
+    <div className="w-[360px] flex gap-3 p-3 rounded-[20px] border border-white/10 bg-gray-900">
       <div className="size-24 rounded-lg overflow-hidden shrink-0">
         <Image
           className="object-cover w-full h-full"
