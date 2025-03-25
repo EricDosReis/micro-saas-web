@@ -1,3 +1,4 @@
+import { ProjectCard } from "@/components/commons/ProjectCard";
 import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
 import { Button } from "@/components/ui/Button";
@@ -34,12 +35,12 @@ const Hero = () => {
             <TotalVisits />
           </div>
 
-          <div className="absolute top-[20%] -left-[45%] -z-10">
-            {/* <ProjectCard /> */}
+          <div className="absolute top-[30%] -left-[40%] -z-10">
+            <ProjectCard />
           </div>
 
-          <div className="absolute -top-[5%] -left-[55%] -z-10">
-            {/* <ProjectCard /> */}
+          <div className="absolute -top-[10%] -left-[55%] -z-10">
+            <ProjectCard />
           </div>
         </div>
       </div>
