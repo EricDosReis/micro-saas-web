@@ -1,7 +1,7 @@
-import { TextInput } from "@/components/ui/TextInput";
-import { Button } from "@/components/ui/Button";
+import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
-
+import { Button } from "@/components/ui/Button";
+import { TextInput } from "@/components/ui/TextInput";
 
 const Hero = () => {
   return (
@@ -18,7 +18,7 @@ const Hero = () => {
         </h2>
 
         <div className="flex items-center gap-2 w-full mt-[10vh]">
-          <span className="text-white text-xl">projectinbio.com</span>
+          <span className="text-white text-xl">myprojects.com</span>
 
           <TextInput placeholder="Your link" />
 
@@ -30,8 +30,8 @@ const Hero = () => {
         <div className="relative">
           <UserCard />
 
-          <div className="absolute -bottom-[7%] -right-[45%]">
-            {/* <TotalVisits /> */}
+          <div className="absolute -bottom-[5%] -right-[45%]">
+            <TotalVisits />
           </div>
 
           <div className="absolute top-[20%] -left-[45%] -z-10">
@@ -44,7 +44,7 @@ const Hero = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export { Hero };
