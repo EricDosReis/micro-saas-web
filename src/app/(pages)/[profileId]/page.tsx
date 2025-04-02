@@ -1,9 +1,12 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { getProfile } from "@/app/actions/get-profile";
 import { ProjectCard } from "@/components/commons/ProjectCard";
 import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
-import { Button } from "@/components/ui/Button";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { NewProject } from "./components/NewProject";
 
 type ProfilePageProps = {
   params: Promise<{ profileId: string }>;
@@ -11,6 +14,16 @@ type ProfilePageProps = {
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { profileId } = await params;
+
+  const profileData = await getProfile(profileId);
+
+  if (!profileData) {
+    return notFound();
+  }
+
+  const session = await auth();
+
+  const isOwner = profileData.userId === session?.user?.id;
 
   return (
     <div className="relative h-screen flex p-20 overflow-hidden">
@@ -39,14 +52,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         <ProjectCard />
         <ProjectCard />
 
-        <Button
-          className="flex gap-2 justify-center items-center min-w-[340px]"
-          variant="dashed"
-        >
-          <Plus className="size-10" />
-
-          <span className="text-lg">New project</span>
-        </Button>
+        {isOwner && <NewProject profileId={profileId} />}
       </div>
     </div>
   );
