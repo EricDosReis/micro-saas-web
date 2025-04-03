@@ -2,10 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getProfile } from "@/app/actions/get-profile";
+import { getProfileProjects } from "@/app/actions/get-profile-projects";
 import { ProjectCard } from "@/components/commons/ProjectCard";
 import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
 import { auth } from "@/lib/auth";
+import { normalizeLink } from "@/lib/formatters";
+import { getFileURL } from "@/lib/storage";
 import { NewProject } from "./components/NewProject";
 
 type ProfilePageProps = {
@@ -14,15 +17,15 @@ type ProfilePageProps = {
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { profileId } = await params;
-
   const profileData = await getProfile(profileId);
 
   if (!profileData) {
     return notFound();
   }
 
-  const session = await auth();
+  const projects = await getProfileProjects(profileId);
 
+  const session = await auth();
   const isOwner = profileData.userId === session?.user?.id;
 
   return (
@@ -44,13 +47,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       </div>
 
       <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projects.map(
+          async ({ name, description, url, imagePath, totalVisits }) => (
+            <ProjectCard
+              key={name}
+              name={name}
+              description={description}
+              url={normalizeLink(url)}
+              imageURL={(await getFileURL(imagePath)) as string}
+              totalVisits={totalVisits}
+            />
+          )
+        )}
 
         {isOwner && <NewProject profileId={profileId} />}
       </div>

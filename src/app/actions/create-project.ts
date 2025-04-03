@@ -17,6 +17,7 @@ const createProject = async (formData: FormData) => {
   const profileId = formData.get("profileId") as string;
   const name = formData.get("name");
   const description = formData.get("description");
+  const url = formData.get("url");
   const image = formData.get("image") as File;
 
   const generatedId = randomUUID();
@@ -39,6 +40,7 @@ const createProject = async (formData: FormData) => {
         name,
         description,
         imagePath,
+        url,
         createdAt: Timestamp.now().toMillis(),
       });
 

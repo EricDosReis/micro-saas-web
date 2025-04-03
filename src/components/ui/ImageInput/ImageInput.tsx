@@ -26,6 +26,7 @@ const ImageInput = ({ onChange }: ImageInputProps) => {
   return (
     <div className="flex flex-col items-center gap-3 text-xs">
       {preview ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={preview}
           alt="Project image"

@@ -124,7 +124,7 @@ const NewProject = ({ profileId }: NewProjectProps) => {
 
                 <TextInput
                   type="url"
-                  id="project-description"
+                  id="project-url"
                   placeholder="Type the project URL"
                   onChange={(e) => setUrl(e.target.value)}
                 />

@@ -13,4 +13,19 @@ const sendToStorage = async (file: File, path: string) => {
   return filePath;
 };
 
-export { sendToStorage };
+const getFileURL = async (path: string) => {
+  if (!path) {
+    return null;
+  }
+
+  const file = firebaseStorage.file(path);
+
+  const [url] = await file.getSignedUrl({
+    action: "read",
+    expires: "01-01-2500",
+  });
+
+  return url;
+};
+
+export { getFileURL, sendToStorage };
