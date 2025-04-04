@@ -41,7 +41,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       </div>
 
       <div className="w-1/2 flex flex-col justify-center items-center h-min gap-4">
-        <UserCard />
+        <UserCard profileData={profileData} />
 
         <TotalVisits />
       </div>

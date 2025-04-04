@@ -1,0 +1,1 @@
+export { EditSocialMedias } from "./EditSocialMedias";
