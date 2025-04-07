@@ -1,3 +1,5 @@
+import "server-only";
+
 import { firebaseDatabase } from "@/lib/firebase";
 
 export type ProfileProjectData = {

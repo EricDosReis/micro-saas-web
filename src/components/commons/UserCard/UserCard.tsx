@@ -1,8 +1,8 @@
-import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ProfileData, SocialMedias } from "@/app/actions/get-profile";
+import type { ProfileData, SocialMedias } from "@/app/actions/get-profile";
+import { EditCustomLinks } from "@/components/commons/EditCustomLinks";
 import { EditSocialMedias } from "@/components/commons/EditSocialMedias";
 import { SocialMediaIcon } from "@/components/commons/SocialMediaIcon";
 import { Button } from "@/components/ui/Button";
@@ -12,7 +12,7 @@ type UserCardProps = {
 };
 
 const UserCard = ({ profileData }: UserCardProps) => {
-  const { socialMedias } = profileData;
+  const { socialMedias, customLinks } = profileData;
 
   return (
     <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white/10 bg-gray-900 rounded-3xl text-white">
@@ -62,13 +62,28 @@ const UserCard = ({ profileData }: UserCardProps) => {
         </div>
 
         <div className="flex flex-col gap-3 w-full h-[172px]">
-          <div className="w-full flex flex-col items-center gap-3">
-            <Button full>SaaS Template - Buy now</Button>
+          {customLinks?.length ? (
+            <div className="w-full flex flex-col items-center gap-3">
+              {customLinks?.map((customLink) => (
+                <Link
+                  className="w-full"
+                  href={customLink.url}
+                  key={customLink.url}
+                  target="_blank"
+                >
+                  <Button full>{customLink.title}</Button>
+                </Link>
+              ))}
 
-            <Button variant="secondary">
-              <Plus />
-            </Button>
-          </div>
+              <EditCustomLinks customLinks={customLinks} />
+            </div>
+          ) : (
+            <div className="w-full flex items-center gap-3">
+              <p className="opacity-30">No custom links added yet</p>
+
+              <EditCustomLinks customLinks={customLinks || []} />
+            </div>
+          )}
         </div>
       </div>
     </div>

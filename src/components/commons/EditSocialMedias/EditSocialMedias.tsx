@@ -61,7 +61,7 @@ const EditSocialMedias = ({
 
   return (
     <>
-      <Button variant="secondary" onClick={() => handleShowModal(true)}>
+      <Button variant="dashed" onClick={() => handleShowModal(true)}>
         <Plus />
       </Button>
 

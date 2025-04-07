@@ -1,3 +1,5 @@
+import type { CustomLink } from "@/app/actions/get-profile";
+
 const normalizeLink = (link: string) => {
   if (!link) return "";
 
@@ -13,4 +15,8 @@ const sanitizeLink = (link?: string) => {
     .toLocaleLowerCase();
 };
 
-export { normalizeLink, sanitizeLink };
+const sanitizeCustomLinks = (links: CustomLink[]) => {
+  return links.filter((link) => link.title.trim() && link.url.trim());
+};
+
+export { normalizeLink, sanitizeCustomLinks, sanitizeLink };

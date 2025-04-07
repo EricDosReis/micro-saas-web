@@ -9,11 +9,17 @@ export type SocialMedias = {
   twitter: string;
 };
 
+export type CustomLink = {
+  title: string;
+  url: string;
+};
+
 export type ProfileData = {
   userId: string;
   totalVisits: number;
   createdAt: number;
   socialMedias?: SocialMedias;
+  customLinks?: CustomLink[];
   updatedAt?: number;
 };
 
