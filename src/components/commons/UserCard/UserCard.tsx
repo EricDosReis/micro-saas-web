@@ -1,25 +1,31 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import type { ProfileData, SocialMedias } from "@/app/actions/get-profile";
 import { EditCustomLinks } from "@/components/commons/EditCustomLinks";
+import { EditProfile } from "@/components/commons/EditProfile";
 import { EditSocialMedias } from "@/components/commons/EditSocialMedias";
 import { SocialMediaIcon } from "@/components/commons/SocialMediaIcon";
 import { Button } from "@/components/ui/Button";
+import { getFileURL } from "@/lib/storage";
 
 type UserCardProps = {
+  isOwner: boolean;
   profileData: ProfileData;
 };
 
-const UserCard = ({ profileData }: UserCardProps) => {
-  const { socialMedias, customLinks } = profileData;
+const UserCard = async ({ isOwner, profileData }: UserCardProps) => {
+  const { name, introduction, imagePath, socialMedias, customLinks } =
+    profileData;
+
+  const imageURL = await getFileURL(imagePath);
 
   return (
     <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white/10 bg-gray-900 rounded-3xl text-white">
       <div className="size-48">
-        <Image
-          src="/me.jpg"
-          alt="An user image"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imageURL as string}
+          alt="User picture"
           className="rounded-full object-cover w-full h-full"
           height={192}
           width={192}
@@ -30,11 +36,19 @@ const UserCard = ({ profileData }: UserCardProps) => {
         <div className="flex flex-col gap-1 w-full">
           <div className="flex items-center gap-2">
             <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
-              EricDosReis
+              {name}
             </h3>
+
+            {isOwner && (
+              <EditProfile
+                name={name}
+                introduction={introduction}
+                imagePath={imageURL as string}
+              />
+            )}
           </div>
 
-          <p className="opacity-70">I develop online products</p>
+          <p className="opacity-70">{introduction}</p>
         </div>
 
         <div className="flex w-full items-center gap-5">
@@ -48,6 +62,7 @@ const UserCard = ({ profileData }: UserCardProps) => {
                     key={socialMedia}
                     href={socialMedias[socialMedia]}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <SocialMediaIcon socialMedia={socialMedia} />
                   </Link>
@@ -58,10 +73,10 @@ const UserCard = ({ profileData }: UserCardProps) => {
             <p className="opacity-30">No social links added yet</p>
           )}
 
-          <EditSocialMedias {...socialMedias!} />
+          {isOwner && <EditSocialMedias {...socialMedias!} />}
         </div>
 
-        <div className="flex flex-col gap-3 w-full h-[172px]">
+        <div className="flex flex-col gap-3 w-full min-h-[172px]">
           {customLinks?.length ? (
             <div className="w-full flex flex-col items-center gap-3">
               {customLinks?.map((customLink) => (
@@ -70,18 +85,21 @@ const UserCard = ({ profileData }: UserCardProps) => {
                   href={customLink.url}
                   key={customLink.url}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Button full>{customLink.title}</Button>
+                  <Button as="span" full>
+                    {customLink.title}
+                  </Button>
                 </Link>
               ))}
 
-              <EditCustomLinks customLinks={customLinks} />
+              {isOwner && <EditCustomLinks customLinks={customLinks || []} />}
             </div>
           ) : (
             <div className="w-full flex items-center gap-3">
               <p className="opacity-30">No custom links added yet</p>
 
-              <EditCustomLinks customLinks={customLinks || []} />
+              {isOwner && <EditCustomLinks customLinks={customLinks || []} />}
             </div>
           )}
         </div>

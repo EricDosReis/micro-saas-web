@@ -16,6 +16,9 @@ export type CustomLink = {
 
 export type ProfileData = {
   userId: string;
+  name: string;
+  introduction: string;
+  imagePath: string;
   totalVisits: number;
   createdAt: number;
   socialMedias?: SocialMedias;

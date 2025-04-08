@@ -33,15 +33,15 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       <div className="fixed top-0 left-0 w-full flex justify-center items-center gap-2 py-2 bg-gray-800">
         <p>You are using a trial version.</p>
 
-        <Link href={`/${profileId}/upgrade`}>
-          <button className="cursor-pointer text-green-600 font-bold">
+        <Link href={`/${profileId}/upgrade`} rel="noopener noreferrer">
+          <span className="cursor-pointer text-green-600 font-bold">
             Upgrade your plan now!
-          </button>
+          </span>
         </Link>
       </div>
 
       <div className="w-1/2 flex flex-col justify-center items-center h-min gap-4">
-        <UserCard profileData={profileData} />
+        <UserCard profileData={profileData} isOwner={isOwner} />
 
         <TotalVisits />
       </div>
