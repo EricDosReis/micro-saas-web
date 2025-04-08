@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 
 import { createProject } from "@/app/actions/create-project";
@@ -10,7 +11,6 @@ import { Modal } from "@/components/ui/Modal";
 import { TextInput } from "@/components/ui/TextInput";
 import { Textarea } from "@/components/ui/Textarea";
 import { compressFiles } from "@/lib/image";
-import { useRouter } from "next/navigation";
 
 type NewProjectProps = {
   profileId: string;
@@ -20,11 +20,11 @@ const NewProject = ({ profileId }: NewProjectProps) => {
   const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [isFetching, setIsFetching] = useState(false);
 
   const handleImageChange = (imageFile: File | null) => {
     setImage(imageFile);
@@ -50,10 +50,10 @@ const NewProject = ({ profileId }: NewProjectProps) => {
     const formData = new FormData();
 
     formData.append("profileId", profileId);
-    formData.append("image", compressedImage);
     formData.append("name", name);
     formData.append("description", description);
     formData.append("url", url);
+    formData.append("image", compressedImage);
 
     await createProject(formData);
 
