@@ -2,41 +2,54 @@ import { ArrowUpFromLine } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
-import { getImagePreview } from "@/lib/image";
+import { createPreviewURL } from "@/lib/image";
+import { cn } from "@/lib/utils";
 
 type ImageInputProps = {
   onChange: (e: File | null) => void;
+  rounded?: boolean;
+  src?: string;
+  disabled?: boolean;
 };
 
-const ImageInput = ({ onChange }: ImageInputProps) => {
+const ImageInput = ({
+  onChange,
+  rounded = false,
+  src = "",
+  disabled = false,
+}: ImageInputProps) => {
   const ref = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [image, setImage] = useState<string | null>(src);
 
   const triggerInputFile = () => {
     ref.current?.click();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const imagePreview = getImagePreview(e);
+    const imagePreviewURL = createPreviewURL(e);
 
-    setPreview(imagePreview);
+    setImage(imagePreviewURL);
     onChange(e.target.files?.[0] ?? null);
   };
 
   return (
     <div className="flex flex-col items-center gap-3 text-xs">
-      {preview ? (
+      {image ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={preview}
-          alt="Project image"
-          className="object-cover object-center w-[100px] h-[100px]"
+          src={image}
+          alt=""
+          className={cn(
+            "object-cover object-center w-[100px] h-[100px]",
+            rounded && "rounded-full"
+          )}
         />
       ) : (
         <Button
           variant="dashed"
           className="w-[100px] h-[100px]"
           onClick={triggerInputFile}
+          disabled={disabled}
         >
           100x100
         </Button>
@@ -46,10 +59,11 @@ const ImageInput = ({ onChange }: ImageInputProps) => {
         variant="ghost"
         className="text-white flex items-center gap-2"
         onClick={triggerInputFile}
+        disabled={disabled}
       >
         <ArrowUpFromLine className="size-4" />
 
-        <span>Add image</span>
+        {image ? "Change image" : "Add image"}
       </Button>
 
       <input
@@ -59,6 +73,7 @@ const ImageInput = ({ onChange }: ImageInputProps) => {
         accept="image/*"
         className="hidden"
         onChange={handleChange}
+        disabled={disabled}
       />
     </div>
   );

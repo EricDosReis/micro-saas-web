@@ -35,7 +35,7 @@ const compressFiles = async (files: File[]) => {
   return compressedFiles.filter((file) => file !== null);
 };
 
-const getImagePreview = (event: ChangeEvent<HTMLInputElement>) => {
+const createPreviewURL = (event: ChangeEvent<HTMLInputElement>) => {
   const file = event.target.files?.[0] ?? null;
 
   if (!file) {
@@ -45,4 +45,4 @@ const getImagePreview = (event: ChangeEvent<HTMLInputElement>) => {
   return URL.createObjectURL(file);
 };
 
-export { compressFiles, getImagePreview };
+export { compressFiles, createPreviewURL };
