@@ -76,7 +76,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
         variant="dashed"
         onClick={() => handleShowModal(true)}
       >
-        <Plus className="size-10" />
+        <Plus className="size-10" aria-hidden />
 
         <span className="text-lg">New project</span>
       </Button>

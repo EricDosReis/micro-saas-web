@@ -61,8 +61,12 @@ const EditSocialMedias = ({
 
   return (
     <>
-      <Button variant="dashed" onClick={() => handleShowModal(true)}>
-        <Plus />
+      <Button
+        variant="dashed"
+        aria-label="Add social medias"
+        onClick={() => handleShowModal(true)}
+      >
+        <Plus aria-hidden />
       </Button>
 
       <Modal isOpen={showModal} open={handleShowModal}>

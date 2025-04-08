@@ -70,9 +70,10 @@ const EditProfile = (props: EditProfileProps) => {
       <Button
         variant="ghost"
         className="text-gray-500"
+        aria-label="Edit profile"
         onClick={() => handleShowModal(true)}
       >
-        <UserPen />
+        <UserPen aria-hidden />
       </Button>
 
       <Modal isOpen={showModal} open={handleShowModal}>

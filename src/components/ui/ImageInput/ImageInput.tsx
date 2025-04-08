@@ -49,6 +49,7 @@ const ImageInput = ({
           variant="dashed"
           className="w-[100px] h-[100px]"
           onClick={triggerInputFile}
+          aria-label="Add image"
           disabled={disabled}
         >
           100x100
@@ -61,7 +62,7 @@ const ImageInput = ({
         onClick={triggerInputFile}
         disabled={disabled}
       >
-        <ArrowUpFromLine className="size-4" />
+        <ArrowUpFromLine className="size-4" aria-hidden />
 
         {image ? "Change image" : "Add image"}
       </Button>

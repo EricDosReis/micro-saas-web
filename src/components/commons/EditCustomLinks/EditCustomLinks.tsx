@@ -86,8 +86,13 @@ const EditCustomLinks = ({ customLinks }: EditCustomLinksProps) => {
 
   return (
     <>
-      <Button variant="dashed" onClick={() => handleShowModal(true)}>
-        <Plus />
+      <Button
+        variant="dashed"
+        className="w-full"
+        aria-label="Add custom links"
+        onClick={() => handleShowModal(true)}
+      >
+        <Plus aria-hidden />
       </Button>
 
       <Modal isOpen={showModal} open={handleShowModal}>
