@@ -12,11 +12,11 @@ import { TextInput } from "@/components/ui/TextInput";
 import { Textarea } from "@/components/ui/Textarea";
 import { compressFiles } from "@/lib/image";
 
-type NewProjectProps = {
+type CreateProjectProps = {
   profileId: string;
 };
 
-const NewProject = ({ profileId }: NewProjectProps) => {
+const CreateProject = ({ profileId }: CreateProjectProps) => {
   const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
@@ -151,4 +151,4 @@ const NewProject = ({ profileId }: NewProjectProps) => {
   );
 };
 
-export { NewProject };
+export { CreateProject };

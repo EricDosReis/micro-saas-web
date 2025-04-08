@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 
 import { getProfile } from "@/app/actions/get-profile";
 import { getProfileProjects } from "@/app/actions/get-profile-projects";
+import { CreateProject } from "@/components/commons/CreateProject";
 import { ProjectCard } from "@/components/commons/ProjectCard";
 import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
 import { auth } from "@/lib/auth";
 import { normalizeLink } from "@/lib/formatters";
 import { getFileURL } from "@/lib/storage";
-import { NewProject } from "./components/NewProject";
 
 type ProfilePageProps = {
   params: Promise<{ profileId: string }>;
@@ -60,7 +60,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           )
         )}
 
-        {isOwner && <NewProject profileId={profileId} />}
+        {isOwner && <CreateProject profileId={profileId} />}
       </div>
     </div>
   );
