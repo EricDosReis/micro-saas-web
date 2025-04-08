@@ -4,22 +4,14 @@ import { Timestamp } from "firebase-admin/firestore";
 
 import { auth } from "@/lib/auth";
 import { firebaseDatabase } from "@/lib/firebase";
+import type { CustomLink } from "./get-profile";
 
-type EditSocialMedias = {
+type SaveCustomLinks = {
   profileId: string;
-  instagram: string;
-  linkedin: string;
-  github: string;
-  twitter: string;
+  customLinks: CustomLink[];
 };
 
-const editSocialMedias = async ({
-  profileId,
-  instagram,
-  linkedin,
-  github,
-  twitter,
-}: EditSocialMedias) => {
+const saveCustomLinks = async ({ profileId, customLinks }: SaveCustomLinks) => {
   const sessionn = await auth();
 
   if (!sessionn) {
@@ -28,12 +20,7 @@ const editSocialMedias = async ({
 
   try {
     await firebaseDatabase.collection("profiles").doc(profileId).update({
-      socialMedias: {
-        instagram,
-        linkedin,
-        github,
-        twitter,
-      },
+      customLinks,
       updatedAt: Timestamp.now().toMillis(),
     });
 
@@ -45,4 +32,4 @@ const editSocialMedias = async ({
   }
 };
 
-export { editSocialMedias };
+export { saveCustomLinks };

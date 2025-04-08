@@ -4,8 +4,8 @@ import { Plus, Trash2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 
-import { editCustomLinks } from "@/app/actions/edit-custom-links";
 import type { CustomLink } from "@/app/actions/get-profile";
+import { saveCustomLinks } from "@/app/actions/save-custom-links";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { TextInput } from "@/components/ui/TextInput";
@@ -41,7 +41,7 @@ const EditCustomLinks = ({ customLinks }: EditCustomLinksProps) => {
 
     setIsFetching(true);
 
-    await editCustomLinks({
+    await saveCustomLinks({
       profileId: profileId as string,
       customLinks: sanitizedCustomLinks,
     });

@@ -4,8 +4,8 @@ import { Github, Instagram, Linkedin, Plus, Twitter } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 
-import { editSocialMedias } from "@/app/actions/edit-social-medias";
 import type { SocialMedias } from "@/app/actions/get-profile";
+import { saveSocialMedias } from "@/app/actions/save-social-medias";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { TextInput } from "@/components/ui/TextInput";
@@ -38,12 +38,12 @@ const EditSocialMedias = ({
     setShowModal(show);
   };
 
-  async function handleEditSocialMedias() {
+  async function handleSaveSocialMedias() {
     setIsFetching(true);
 
     if (!profileId) return;
 
-    await editSocialMedias({
+    await saveSocialMedias({
       profileId: profileId as string,
       github: githubValue,
       instagram: instagramValue,
@@ -124,7 +124,7 @@ const EditSocialMedias = ({
               Back
             </Button>
 
-            <Button onClick={handleEditSocialMedias} disabled={isFetching}>
+            <Button onClick={handleSaveSocialMedias} disabled={isFetching}>
               Save
             </Button>
           </div>
