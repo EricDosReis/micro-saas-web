@@ -5,7 +5,7 @@ import { randomUUID } from "node:crypto";
 
 import { auth } from "@/lib/auth";
 import { firebaseDatabase } from "@/lib/firebase";
-import { sendToStorage } from "@/lib/storage";
+import { saveFile } from "@/lib/storage";
 
 const createProject = async (formData: FormData) => {
   const session = await auth();
@@ -22,7 +22,7 @@ const createProject = async (formData: FormData) => {
 
   const generatedId = randomUUID();
 
-  const imagePath = await sendToStorage(
+  const imagePath = await saveFile(
     image,
     `projects-images/${profileId}/${generatedId}`
   );

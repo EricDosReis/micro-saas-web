@@ -1,6 +1,6 @@
 import { firebaseStorage } from "./firebase";
 
-const sendToStorage = async (file: File, path: string) => {
+const saveFile = async (file: File, path: string) => {
   const storage = firebaseStorage.file(path);
 
   const arrayBuffer = await file.arrayBuffer();
@@ -28,4 +28,4 @@ const getFileURL = async (path: string) => {
   return url;
 };
 
-export { getFileURL, sendToStorage };
+export { getFileURL, saveFile };
