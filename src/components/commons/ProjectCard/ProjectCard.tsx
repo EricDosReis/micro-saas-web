@@ -13,7 +13,7 @@ const ProjectCard = async ({
   totalVisits,
 }: ProjectCardProps) => {
   return (
-    <Link href={url} target="_blank">
+    <Link href={url} target="_blank" rel="noopener noreferrer">
       <div className="w-[360px] flex gap-3 p-3 rounded-[20px] border border-white/10 bg-gray-900">
         <div className="size-24 rounded-lg overflow-hidden shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
