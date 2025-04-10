@@ -45,10 +45,10 @@ const EditSocialMedias = ({
 
     await saveSocialMedias({
       profileId: profileId as string,
-      github: githubValue,
-      instagram: instagramValue,
-      linkedin: linkedinValue,
-      twitter: twitterValue,
+      github: githubValue!,
+      instagram: instagramValue!,
+      linkedin: linkedinValue!,
+      twitter: twitterValue!,
     });
 
     startTransition(() => {

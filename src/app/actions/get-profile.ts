@@ -3,10 +3,10 @@ import "server-only";
 import { firebaseDatabase } from "@/lib/firebase";
 
 export type SocialMedias = {
-  instagram: string;
-  linkedin: string;
-  github: string;
-  twitter: string;
+  instagram?: string;
+  linkedin?: string;
+  github?: string;
+  twitter?: string;
 };
 
 export type CustomLink = {
