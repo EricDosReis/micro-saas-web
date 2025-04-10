@@ -6,25 +6,22 @@ import { EditProfile } from "@/components/commons/EditProfile";
 import { EditSocialMedias } from "@/components/commons/EditSocialMedias";
 import { SocialMediaIcon } from "@/components/commons/SocialMediaIcon";
 import { Button } from "@/components/ui/Button";
-import { getFileURL } from "@/lib/storage";
 
 type UserCardProps = {
   isOwner: boolean;
-  profileData: ProfileData;
+  imageURL: string;
+  profile: ProfileData;
 };
 
-const UserCard = async ({ isOwner, profileData }: UserCardProps) => {
-  const { name, introduction, imagePath, socialMedias, customLinks } =
-    profileData;
-
-  const imageURL = await getFileURL(imagePath);
+const UserCard = async ({ isOwner, imageURL, profile }: UserCardProps) => {
+  const { name, introduction, socialMedias, customLinks } = profile;
 
   return (
     <div className="w-[348px] flex flex-col gap-5 items-center p-5 border border-white/10 bg-gray-900 rounded-3xl text-white">
       <div className="size-48">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={imageURL as string}
+          src={imageURL}
           alt="User picture"
           className="rounded-full object-cover w-full h-full"
           height={192}

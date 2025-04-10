@@ -3,8 +3,12 @@ import { TotalVisits } from "@/components/commons/TotalVisits";
 import { UserCard } from "@/components/commons/UserCard";
 import { Button } from "@/components/ui/Button";
 import { TextInput } from "@/components/ui/TextInput";
+import { profileMock } from "@/mocks/profile";
+import { projectsMock } from "@/mocks/project";
 
 const Hero = () => {
+  const [firstProject, secondProject] = projectsMock;
+
   return (
     <section className="flex h-screen">
       <div className="w-full flex flex-col gap-2 mt-[35vh]">
@@ -29,18 +33,30 @@ const Hero = () => {
 
       <div className="w-full flex items-center justify-center bg-[radial-gradient(circle_at_50%_50%,#453870,transparent_55%)]">
         <div className="relative">
-          <UserCard />
+          <UserCard
+            profile={profileMock}
+            imageURL={profileMock.imagePath}
+            isOwner={false}
+          />
 
           <div className="absolute -bottom-[5%] -right-[45%]">
-            <TotalVisits />
+            <TotalVisits visits={profileMock.totalVisits} />
           </div>
 
           <div className="absolute top-[30%] -left-[40%] -z-10">
-            <ProjectCard />
+            <ProjectCard
+              project={firstProject}
+              imageURL={firstProject.imagePath}
+              isOwner={false}
+            />
           </div>
 
           <div className="absolute -top-[10%] -left-[55%] -z-10">
-            <ProjectCard />
+            <ProjectCard
+              project={secondProject}
+              imageURL={secondProject.imagePath}
+              isOwner={false}
+            />
           </div>
         </div>
       </div>
