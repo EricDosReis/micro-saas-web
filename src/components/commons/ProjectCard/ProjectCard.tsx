@@ -1,20 +1,39 @@
-import type { ProfileProjectData } from "@/app/actions/get-profile-projects";
+"use client";
+
 import Link from "next/link";
+
+import type { ProfileProjectData } from "@/app/actions/get-profile-projects";
+import { increaseProjectVisits } from "@/app/actions/increase-project-visits";
 
 type ProjectCardProps = {
   imageURL: string;
-} & Pick<ProfileProjectData, "name" | "description" | "url" | "totalVisits">;
+  isOwner: boolean;
+  project: Pick<
+    ProfileProjectData,
+    "id" | "name" | "description" | "url" | "profileId" | "totalVisits"
+  >;
+};
 
-const ProjectCard = async ({
-  name,
-  description,
-  url,
-  imageURL,
-  totalVisits,
-}: ProjectCardProps) => {
+const ProjectCard = ({ project, imageURL, isOwner }: ProjectCardProps) => {
+  const { id, name, description, url, profileId, totalVisits } = project;
+
+  const handleClick = async () => {
+    if (isOwner) {
+      return;
+    }
+
+    await increaseProjectVisits(profileId, id);
+  };
+
   return (
-    <Link href={url} target="_blank" rel="noopener noreferrer">
-      <div className="w-[360px] flex gap-3 p-3 rounded-[20px] border border-white/10 bg-gray-900">
+    <Link
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={handleClick}
+      className="flex"
+    >
+      <div className="w-[360px] h-full flex gap-3 p-3 rounded-[20px] border border-white/10 bg-gray-900">
         <div className="size-24 rounded-lg overflow-hidden shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

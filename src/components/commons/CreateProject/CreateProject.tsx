@@ -72,7 +72,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
   return (
     <>
       <Button
-        className="flex gap-2 justify-center items-center min-w-[340px]"
+        className="flex gap-2 justify-center items-center min-w-[340px] rounded-[20px]"
         variant="dashed"
         onClick={() => handleShowModal(true)}
       >
@@ -86,7 +86,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
           <h3 className="text-white font-bold text-3xl">New project</h3>
 
           <div className="flex gap-10">
-            <ImageInput onChange={handleImageChange} />
+            <ImageInput onChange={handleImageChange} disabled={isFetching} />
 
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-1">
@@ -98,6 +98,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
                   id="project-name"
                   placeholder="Type the project name"
                   onChange={(e) => setName(e.target.value)}
+                  disabled={isFetching}
                 />
               </div>
 
@@ -114,6 +115,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
                   placeholder="A short description of the project"
                   className="h-36"
                   onChange={(e) => setDescription(e.target.value)}
+                  disabled={isFetching}
                 />
               </div>
 
@@ -127,6 +129,7 @@ const CreateProject = ({ profileId }: CreateProjectProps) => {
                   id="project-url"
                   placeholder="Type the project URL"
                   onChange={(e) => setUrl(e.target.value)}
+                  disabled={isFetching}
                 />
               </div>
             </div>

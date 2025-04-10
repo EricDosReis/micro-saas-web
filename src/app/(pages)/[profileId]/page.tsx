@@ -51,19 +51,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         {isOwner && <TotalVisits visits={profileData.totalVisits || 0} />}
       </div>
 
-      <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-        {projects.map(
-          async ({ name, description, url, imagePath, totalVisits }) => (
-            <ProjectCard
-              key={name}
-              name={name}
-              description={description}
-              url={normalizeLink(url)}
-              imageURL={(await getFileURL(imagePath)) as string}
-              totalVisits={totalVisits}
-            />
-          )
-        )}
+      <div className="w-full flex justify-center items-stretch content-start gap-4 flex-wrap overflow-y-auto">
+        {projects.map(async (project) => (
+          <ProjectCard
+            key={project.name}
+            imageURL={(await getFileURL(project.imagePath)) as string}
+            isOwner={isOwner}
+            project={{
+              ...project,
+              url: normalizeLink(project.url),
+            }}
+          />
+        ))}
 
         {isOwner && <CreateProject profileId={profileId} />}
       </div>
